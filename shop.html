@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر استار لينك - التطبيقات والملفات</title>
+    <style>
+        :root { --primary: #00d2ff; --bg-dark: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; }
+        header { background: #1e1b4b; padding: 2rem; text-align: center; color: var(--primary); }
+        nav { background: #1e293b; display: flex; justify-content: center; gap: 15px; padding: 1rem; flex-wrap: wrap; }
+        nav a, nav button { color: #fff; text-decoration: none; padding: 0.5rem 1rem; background: #334155; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+        nav a:hover, nav button:hover { background: var(--primary); color: #000; }
+        
+        .search-filter { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .search-filter input { flex: 1; min-width: 250px; padding: 0.7rem; background: #1e293b; border: 1px solid #334155; color: #fff; border-radius: 6px; }
+        .search-filter button { padding: 0.7rem 1.2rem; background: #334155; border: none; color: #fff; border-radius: 6px; cursor: pointer; }
+        .search-filter button:hover { background: var(--primary); color: #000; }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border: 1px solid #334155; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card img { width: 100%; height: 160px; object-fit: cover; }
+        .card-content { padding: 1.2rem; }
+        .card h2 { color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+        
+        .badges { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+        .badge { background: #334155; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; color: #fff; }
+        .badge.free { background: #10b981; color: #000; font-weight: bold; }
+        .badge.paid { background: #f59e0b; color: #000; font-weight: bold; }
+
+        .download-btn { display: block; width: 100%; padding: 0.7rem; background: var(--primary); color: #000; text-align: center; text-decoration: none; font-weight: bold; border: none; cursor: pointer; }
+        .download-btn:hover { background: #00b4d8; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid var(--primary); max-height: 90vh; overflow-y: auto; }
+        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; padding: 0.7rem; margin: 0.5rem 0; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px; }
+        .btn { width: 100%; padding: 0.8rem; background: var(--primary); border: none; border-radius: 6px; font-weight: bold; cursor: pointer; color: #000; margin-top: 0.5rem; }
+        .btn-danger { background: #ef4444; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🛍️ متجر استار لينك للملفات والتطبيقات</h1>
+        <p>حمّل أحدث التطبيقات، الألعاب، وملفات الـ APK والبرمجيات بسهولة</p>
+    </header>
+
+    <nav>
+        <a href="/">الرئيسية</a>
+        <a href="/shop">متجر الملفات والتطبيقات</a>
+        <button onclick="openAdminModal()">📂 مكتب المدير (رفع ملف)</button>
+    </nav>
+
+    <!-- شريط البحث والفلترة -->
+    <div class="search-filter">
+        <input type="text" id="search" placeholder="ابحث عن تطبيق، لعبة، أو ملف..." oninput="searchItems()">
+        <button onclick="filterItems('الكل')">الكل</button>
+        <button onclick="filterItems('تطبيق')">التطبيقات</button>
+        <button onclick="filterItems('لعبة')">الألعاب</button>
+    </div>
+
+    <!-- قائمة عرض الملفات والتطبيقات -->
+    <div class="container" id="shopContainer">
+        <!-- ستعرض العناصر هنا ديناميكياً -->
+    </div>
+
+    <!-- نافذة تسجيل دخول الأدمن -->
+    <div id="loginBox" class="modal">
+        <div class="modal-content" style="max-width:350px;">
+            <h3>دخول مكتب المدير</h3>
+            <input type="password" id="adminPassword" placeholder="كلمة المرور">
+            <button class="btn" onclick="loginAdmin()">دخول</button>
+            <button class="btn btn-danger" onclick="closeModal('loginBox')">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- لوحة مدير المتجر (رفع ملفات APK، تطبيقات، وألعاب) -->
+    <div id="adminPanel" class="modal">
+        <div class="modal-content">
+            <h3>📂 رفع تطبيق أو ملف جديد للمتجر</h3>
+            <input type="text" id="itemName" placeholder="اسم التطبيق أو اللعبة أو الملف">
+            <textarea id="itemDesc" placeholder="الوصف التفصيلي للملف..."></textarea>
+            <input type="text" id="itemImage" placeholder="رابط صورة الغلاف أو الأيقونة (URL)">
+            <input type="text" id="itemLink" placeholder="رابط تحميل الملف المباشر (APK, EXE, ZIP...)">
+            
+            <select id="itemPlatform">
+                <option value="APK (Android)">APK (أندرويد)</option>
+                <option value="IPA (iOS)">IPA (أيفون)</option>
+                <option value="EXE (Windows)">EXE (ويندوز/كمبيوتر)</option>
+                <option value="ZIP / RAR">ملف مضغوط (ZIP / RAR)</option>
+                <option value="Web (HTML5)">لعبة / تطبيق ويب</option>
+            </select>
+            
+            <select id="itemType">
+                <option value="تطبيق">تطبيق</option>
+                <option value="لعبة">لعبة</option>
+                <option value="أداة">أداة وبرمجيات</option>
+            </select>
+            
+            <select id="itemPrice">
+                <option value="مجاني">مجاني</option>
+                <option value="مدفوع">مدفوع</option>
+            </select>
+            
+            <button class="btn" onclick="submitNewItem()">🚀 رفع ونشر في المتجر</button>
+            <button class="btn btn-danger" onclick="closeModal('adminPanel')">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        let allItems = [];
+
+        // جلب عناصر المتجر من السيرفر
+        async function loadShopItems() {
+            try {
+                let res = await fetch('/api/games');
+                allItems = await res.json();
+                renderItems(allItems);
+            } catch (err) {
+                console.error("خطأ في الاتصال بالمتجر", err);
+            }
+        }
+
+        // عرض العناصر في واجهة المتجر
+        function renderItems(list) {
+            let container = document.getElementById("shopContainer");
+            if (!container) return;
+
+            let html = "";
+            list.forEach(item => {
+                let priceClass = item.price === 'مجاني' ? 'free' : 'paid';
+                html += `
+                <div class="card">
+                    <div>
+                        <img src="${item.image || 'https://picsum.photos/400/200'}" alt="${item.name}">
+                        <div class="card-content">
+                            <div class="badges">
+                                <span class="badge ${priceClass}">${item.price}</span>
+                                <span class="badge">${item.platform || 'ملف'}</span>
+                                <span class="badge">${item.type}</span>
+                            </div>
+                            <h2>${item.name}</h2>
+                            <p>${item.desc}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="${item.link}" target="_blank" class="download-btn">⬇️ تحميل الملف / التثبيت</a>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // فتح مكتب المدير أو طالب تسجيل الدخول
+        function openAdminModal() {
+            if (sessionStorage.getItem('token')) {
+                document.getElementById("adminPanel").style.display = "flex";
+            } else {
+                document.getElementById("loginBox").style.display = "flex";
+            }
+        }
+
+        // تسجيل دخول الأدمن للمتجر
+        async function loginAdmin() {
+            let pass = document.getElementById("adminPassword").value;
+            try {
+                let res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ password: pass })
+                });
+                let data = await res.json();
+                if (data.success) {
+                    sessionStorage.setItem('token', data.token);
+                    closeModal('loginBox');
+                    document.getElementById("adminPassword").value = "";
+                    document.getElementById("adminPanel").style.display = "flex";
+                } else {
+                    alert(data.message);
+                }
+            } catch (e) {
+                alert("تعذر الاتصال بالسيرفر");
+            }
+        }
+
+        // رفع ملف جديد وإضافته لقاعدة بيانات المتجر
+        async function submitNewItem() {
+            let token = sessionStorage.getItem('token');
+            let newItem = {
+                token: token,
+                name: document.getElementById("itemName").value,
+                desc: document.getElementById("itemDesc").value,
+                image: document.getElementById("itemImage").value,
+                link: document.getElementById("itemLink").value,
+                platform: document.getElementById("itemPlatform").value,
+                type: document.getElementById("itemType").value,
+                price: document.getElementById("itemPrice").value
+            };
+
+            try {
+                let res = await fetch('/api/games/add', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(newItem)
+                });
+                let data = await res.json();
+                if (data.success) {
+                    closeModal('adminPanel');
+                    loadShopItems();
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            } catch (e) {
+                alert("حدث خطأ أثناء رفع الملف");
+            }
+        }
+
+        // البحث داخل المتجر
+        function searchItems() {
+            let query = document.getElementById("search").value.toLowerCase();
+            let filtered = allItems.filter(i => i.name.toLowerCase().includes(query) || i.desc.toLowerCase().includes(query));
+            renderItems(filtered);
+        }
+
+        // فلترة العناصر (الكل / تطبيقات / ألعاب)
+        function filterItems(type) {
+            if (type === 'الكل') {
+                renderItems(allItems);
+            } else {
+                let filtered = allItems.filter(i => i.type === type);
+                renderItems(filtered);
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        window.onload = loadShopItems;
+    </script>
+</body>
+</html>
