@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 // كلمة المرور السرية الخاصة بلوحة التحكم (مخفية تماماً عن المتصفح و F12)
 const ADMIN_PASSWORD = "09980166120993317248";
 
-// تفعيل حماية وسد الثغرات عبر Helmet
+// تفعيل الحماية والأمان عبر Helmet
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -24,10 +24,10 @@ app.use(
 
 app.use(express.json());
 
-// ربط المجلد الحالي لتقديم الملفات الثابتة (مثل index.html والصور)
+// ربط المجلد لتقديم ملفات الموقع الثابتة
 app.use(express.static(path.join(__dirname)));
 
-// مسار التحقق الآمن من كلمة المرور (في الخلفية)
+// مسار التحقق الآمن من كلمة المرور في الخلفية
 app.post('/api/login', (req, res) => {
     const { password } = req.body;
     if (password === ADMIN_PASSWORD) {
@@ -37,7 +37,7 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-// ربط جميع المسارات بملف index.html الرئيسي للمتجر
+// ربط جميع المسارات بملف الواجهة الرئيسي index.html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
