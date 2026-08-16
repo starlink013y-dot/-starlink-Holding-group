@@ -425,7 +425,7 @@ footer{
         <h3 style="color:gold; margin-bottom:10px;">➕ إضافة عنصر جديد</h3>
         <input type="text" id="newName" placeholder="اسم العنصر (لعبة، تطبيق، فيديو)">
         <textarea id="newDesc" placeholder="الوصف"></textarea>
-        <input type="text" id="newImage" placeholder="رابط الصورة (للألعاب/التطبيقات) أو رابط اليوتيوب (للفيديوهات)">
+        <input type="text" id="newImage" placeholder="رابط الصورة أو رابط اليوتيوب">
         <input type="text" id="newLink" placeholder="رابط التحميل المباشر (اختياري)">
         <select id="newType">
             <option value="لعبة">لعبة</option>
@@ -621,18 +621,11 @@ function toggleTheme() { document.body.classList.toggle("light-mode"); }
 function openLogin() { document.getElementById("loginBox").style.display = "flex"; }
 function closeLogin() { document.getElementById("loginBox").style.display = "none"; }
 
-async function hashPassword(string) {
-    const utf8 = new TextEncoder().encode(string);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
+// دالة تسجيل الدخول الآمنة عبر السيرفر (محمية من F12)
 async function loginAdmin() {
     let pass = document.getElementById("adminPassword").value;
     
     try {
-        // إرسال كلمة المرور إلى السيرفر للتحقق منها سراً وسد ثغرة F12
         let response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -653,7 +646,6 @@ async function loginAdmin() {
         showNotify("❌ حدث خطأ في الاتصال بالسيرفر");
     }
 }
-
 
 function closeAdmin() { document.getElementById("adminPanel").classList.remove("show"); }
 
