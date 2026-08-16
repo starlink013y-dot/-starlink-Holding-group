@@ -4,10 +4,10 @@ const helmet = require('helmet');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// كلمة المرور السرية المخزنة حصرياً في السيرفر (لا يمكن لأحد رؤيتها عبر المتصفح F12)
+// كلمة المرور السرية الخاصة بلوحة التحكم (مخفية تماماً عن المتصفح و F12)
 const ADMIN_PASSWORD = "09980166120993317248";
 
-// تفعيل الحماية وسد الثغرات عبر Helmet
+// تفعيل حماية وسد الثغرات عبر Helmet
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -23,9 +23,11 @@ app.use(
 );
 
 app.use(express.json());
+
+// ربط المجلد الحالي لتقديم الملفات الثابتة (مثل index.html والصور)
 app.use(express.static(path.join(__dirname)));
 
-// مسار التحقق الآمن من كلمة المرور (يعمل في الخلفية تماماً)
+// مسار التحقق الآمن من كلمة المرور (في الخلفية)
 app.post('/api/login', (req, res) => {
     const { password } = req.body;
     if (password === ADMIN_PASSWORD) {
@@ -35,11 +37,12 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-// تشغيل الملف الرئيسي للمتجر
+// ربط جميع المسارات بملف index.html الرئيسي للمتجر
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// تشغيل السيرفر
 app.listen(PORT, () => {
     console.log(`Server is running securely on port ${PORT}`);
 });
