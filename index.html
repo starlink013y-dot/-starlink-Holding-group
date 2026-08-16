@@ -1,191 +1,719 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
- 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مجموعة ستار لينك القابضة | STAR LINK HOLDING</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجموعة استار لينك القابضة</title>
-    <style>
-        :root { --primary: #00d2ff; --bg-dark: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; }
-        header { background: #1e1b4b; padding: 2rem; text-align: center; color: var(--primary); }
-        nav { background: #1e293b; display: flex; justify-content: center; gap: 15px; padding: 1rem; flex-wrap: wrap; }
-        nav a, nav button { color: #fff; text-decoration: none; padding: 0.5rem 1rem; background: #334155; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
-        nav a:hover, nav button:hover { background: var(--primary); color: #000; }
-        
-        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-        .post-card { background: var(--card-bg); border: 1px solid #334155; border-radius: 12px; margin-bottom: 2rem; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .post-card img, .post-card iframe { width: 100%; max-height: 400px; object-fit: cover; border: none; }
-        .post-body { padding: 1.5rem; }
-        .badge { background: var(--primary); color: #000; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.8rem; display: inline-block; margin-bottom: 0.5rem; }
-        
-        .channel-btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; background: #2563eb; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; }
-        .channel-btn:hover { background: #1d4ed8; }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid var(--primary); max-height: 90vh; overflow-y: auto; }
-        .modal-content input, .modal-content textarea, .modal-content select { width: 100%; padding: 0.7rem; margin: 0.5rem 0; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px; }
-        .btn { width: 100%; padding: 0.8rem; background: var(--primary); border: none; border-radius: 6px; font-weight: bold; cursor: pointer; color: #000; margin-top: 0.5rem; }
-        .btn-danger { background: #ef4444; color: #fff; }
-    </style>
+body{
+    background:#0b0b0b;
+    color:white;
+    padding-bottom:80px;
+    transition: 0.3s;
+}
+
+header{
+    background:#111;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    border-bottom:2px solid gold;
+    z-index: 100;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:gold;
+}
+
+.top-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    background:#222;
+    color:white;
+    border:1px solid gold;
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.hero{
+    padding:40px 20px;
+    text-align:center;
+    background:linear-gradient(180deg,#111,#1a1a1a);
+}
+
+.hero h1{
+    font-size:32px;
+    color:gold;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#ccc;
+    margin-bottom:20px;
+}
+
+#search{
+    width:90%;
+    max-width:500px;
+    padding:12px;
+    border:1px solid gold;
+    background: #181818;
+    color: white;
+    border-radius:10px;
+    font-size:16px;
+    outline: none;
+}
+
+.categories{
+    display:flex;
+    gap:10px;
+    padding:20px;
+    overflow-x:auto;
+    justify-content: center;
+}
+
+.categories button{
+    background:#1d1d1d;
+    color:white;
+    border:1px solid gold;
+    padding:8px 16px;
+    border-radius:30px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.categories button:hover{
+    background:gold;
+    color:black;
+}
+
+.section-title{
+    padding:20px;
+    font-size:24px;
+    color:gold;
+    font-weight:bold;
+}
+
+.games{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    padding:0 20px;
+}
+
+.card{
+    background:#181818;
+    border:1px solid #333;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
+    position: relative;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:gold;
+}
+
+.card img, .card iframe{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border:none;
+}
+
+.card h2{
+    padding:10px 15px 5px;
+    color:gold;
+    font-size:18px;
+}
+
+.card p{
+    padding:0 15px 10px;
+    color:#ccc;
+    font-size: 14px;
+}
+
+.card-actions{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 10px;
+    align-items: center;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.free{ background:#009933; color: white; }
+.paid{ background:#cc0000; color: white; }
+.video-badge{ background:#0066cc; color: white; }
+
+.download{
+    display:block;
+    margin:10px 15px 15px;
+    padding:10px;
+    background:gold;
+    color:black;
+    text-align:center;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor: pointer;
+    border: none;
+    width: calc(100% - 30px);
+}
+
+.details{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.95);
+    display:none;
+    overflow:auto;
+    z-index:9999;
+}
+
+.details-box{
+    max-width:650px;
+    margin:40px auto;
+    padding:20px;
+    background: #181818;
+    border: 1px solid gold;
+    border-radius: 15px;
+}
+
+.details img, .details iframe{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius: 10px;
+}
+
+.close{
+    float:left;
+    background:red;
+    color:white;
+    padding:8px 12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.comments-section{
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.comments-section h3{ color: gold; margin-bottom: 10px; font-size: 16px; }
+.comment-input-box{ display: flex; gap: 5px; margin-bottom: 15px; }
+.comment-input-box input{ flex: 1; padding: 8px; background: #222; border: 1px solid #444; color: white; border-radius: 5px; }
+.comment-input-box button{ padding: 8px 15px; background: gold; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+.comment-list{ max-height: 150px; overflow-y: auto; font-size: 13px; color: #ddd; }
+.comment-item{ background: #222; padding: 6px 10px; margin-bottom: 5px; border-radius: 5px; border-right: 3px solid gold; }
+
+.notify{
+    position:fixed;
+    bottom:80px;
+    left:50%;
+    transform:translateX(-50%);
+    background:gold;
+    color:black;
+    padding:12px 25px;
+    border-radius:10px;
+    font-weight:bold;
+    display:none;
+    z-index:99999;
+}
+
+.panel{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:300px;
+    height:100%;
+    background:#111;
+    transition:.4s;
+    z-index:99999;
+    overflow:auto;
+    padding:20px;
+    border-left:2px solid gold;
+}
+
+.panel.show{ right:0; }
+.panel h2{ color:gold; margin-bottom:20px; }
+.panel button{ width:100%; margin-top:10px; padding: 10px; background: gold; border:none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:60px;
+    background:#111;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    border-top:2px solid gold;
+    z-index:9999;
+}
+
+.bottom-nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:13px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.bottom-nav button:hover{ color:gold; }
+
+.light-mode{ background:#eeeeee; color:black; }
+.light-mode header{ background:white; }
+.light-mode .card, .light-mode .details-box{ background:white; color:black; }
+.light-mode .hero{ background: linear-gradient(180deg,#eee,#ddd); }
+
+footer{
+    margin-top:40px;
+    padding:20px;
+    background:#111;
+    text-align:center;
+    border-top:2px solid gold;
+    color:#aaa;
+}
+
+.admin-panel{
+    position:fixed;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:#0b0b0b;
+    overflow:auto;
+    transition:.4s;
+    z-index:99999;
+    padding:20px;
+}
+.admin-panel.show{ left:0; }
+.admin-panel input, .admin-panel textarea, .admin-panel select{
+    width:100%; padding:12px; margin:10px 0; background:#1c1c1c; color:white; border:1px solid #444; border-radius:8px;
+}
+
+.login-box{
+    position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.95); display:none; justify-content:center; align-items:center; z-index:100000;
+}
+.login-card{ background:#181818; padding:25px; border-radius:15px; width:90%; max-width:350px; border:2px solid gold; text-align:center; }
+.login-card input{ width:100%; padding:12px; margin:10px 0; background:#222; color:white; border:1px solid #444; border-radius:8px; }
+
+.admin-item-row { display: flex; justify-content: space-between; align-items: center; background: #181818; padding: 10px; margin-bottom: 8px; border-radius: 8px; border: 1px solid #333; }
+.delete-btn { background: #cc0000; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>✨ مجموعة استار لينك القابضة ✨</h1>
-        <p>الأخبار، العروض، وأحدث المشروعات والألعاب قيد التطوير</p>
-    </header>
-
-    <nav>
-        <a href="/">الرئيسية</a>
-        <a href="/shop">متجر الملفات والتطبيقات</a>
-        <button onclick="openLogin()">⚙️ لوحة نشر الرئيسية</button>
-    </nav>
-
-    <div class="container" id="postsContainer">
-        <!-- ستظهر المنشورات والقنوات هنا تلقائياً -->
+<header>
+    <div class="logo">⭐ STAR LINK HOLDING</div>
+    <div class="top-buttons">
+        <button class="icon-btn" onclick="openProfile()">👤</button>
+        <button class="icon-btn" onclick="toggleTheme()">🌙</button>
+        <button class="icon-btn" onclick="openLogin()">⚙️</button>
     </div>
+</header>
 
-    <!-- نافذة تسجيل الدخول للمدير -->
-    <div id="loginBox" class="modal">
-        <div class="modal-content" style="max-width:350px;">
-            <h3>دخول المدير</h3>
-            <input type="password" id="adminPassword" placeholder="كلمة المرور">
-            <button class="btn" onclick="loginMainAdmin()">دخول</button>
-            <button class="btn btn-danger" onclick="closeModal('loginBox')">إلغاء</button>
-        </div>
+<section class="hero">
+    <h1>مجموعة ستار لينك القابضة</h1>
+    <p>منصة احترافية لنشر الألعاب، التطبيقات، وفيديوهات اليوتيوب</p>
+    <input id="search" type="text" placeholder="ابحث عن لعبة، تطبيق، أو فيديو..." onkeyup="searchGames()">
+
+    <div class="categories">
+        <button onclick="filterGames('الكل')">الكل</button>
+        <button onclick="filterGames('لعبة')">🎮 ألعاب</button>
+        <button onclick="filterGames('تطبيق')">📱 تطبيقات</button>
+        <button onclick="filterGames('فيديو')">▶️ فيديوهات</button>
     </div>
+</section>
 
-    <!-- لوحة نشر الفيديوهات، الصور، الألعاب، وروابط القنوات -->
-    <div id="mainAdminPanel" class="modal">
-        <div class="modal-content">
-            <h3>📢 نشر جديد بالصفحة الرئيسية</h3>
-            <input type="text" id="postTitle" placeholder="عنوان المنشور أو اسم القناة/المشروع">
-            
-            <select id="postCategory">
-                <option value="قيد التطوير">🕹️ لعبة / مشروع قيد التطوير</option>
-                <option value="قناة / رابط">🔗 رابط قناة أو منصة اجتماعية</option>
-                <option value="إعلان">📢 إعلان مهم / عرض</option>
-                <option value="فيديو">🎬 فيديو ترويجي / شرح</option>
-                <option value="صورة">🖼️ معرض صور</option>
-            </select>
-            
-            <textarea id="postDesc" placeholder="تفاصيل المنشور أو وصف القناة..."></textarea>
-            <input type="text" id="postMedia" placeholder="رابط الصورة (URL)">
-            <input type="text" id="postVideo" placeholder="رابط فيديو اليوتيوب (اختياري)">
-            <input type="text" id="postLink" placeholder="رابط القناة أو الموقع الخارجي (اختياري)">
-            
-            <button class="btn" onclick="submitMainPost()">🚀 نشر في الصفحة الرئيسية</button>
-            <button class="btn btn-danger" onclick="closeModal('mainAdminPanel')">إغلاق</button>
-        </div>
-    </div>
+<h2 class="section-title">🔥 المحتوى المتميز</h2>
+<div class="games" id="games"></div>
 
-    <script>
-        // جلب المنشورات من السيرفر
-        async function loadPosts() {
-            try {
-                let res = await fetch('/api/posts');
-                let posts = await res.json();
-                let html = "";
-                
-                posts.forEach(p => {
-                    let mediaHtml = "";
-                    if (p.videoUrl) {
-                        mediaHtml = `<iframe src="${p.videoUrl}" height="300" allowfullscreen></iframe>`;
-                    } else if (p.mediaUrl) {
-                        mediaHtml = `<img src="${p.mediaUrl}" alt="media">`;
-                    }
-
-                    let linkBtn = p.link ? `<br><a href="${p.link}" target="_blank" class="channel-btn">🔗 زيارة الرابط / القناة</a>` : "";
-
-                    html += `
-                    <div class="post-card">
-                        ${mediaHtml}
-                        <div class="post-body">
-                            <span class="badge">${p.category}</span>
-                            <h2 style="margin:10px 0; color:var(--primary);">${p.title}</h2>
-                            <p style="color:#94a3b8; line-height:1.6;">${p.desc}</p>
-                            ${linkBtn}
-                        </div>
-                    </div>`;
-                });
-                document.getElementById("postsContainer").innerHTML = html;
-            } catch (err) {
-                console.error("خطأ في جلب المنشورات", err);
-            }
-        }
-
-        // التحقق من تسجيل دخول الأدمن
-        async function loginMainAdmin() {
-            let pass = document.getElementById("adminPassword").value;
-            try {
-                let res = await fetch('/api/admin/login', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ password: pass })
-                });
-                let data = await res.json();
-                if(data.success) {
-                    sessionStorage.setItem('token', data.token);
-                    closeModal('loginBox');
-                    document.getElementById("adminPassword").value = "";
-                    document.getElementById("mainAdminPanel").style.display = "flex";
-                } else {
-                    alert(data.message);
-                }
-            } catch(e) {
-                alert("تعذر الاتصال بالسيرفر");
-            }
-        }
-
-        // إرسال منشور جديد متضمن الروابط والفيديوهات
-        async function submitMainPost() {
-            let token = sessionStorage.getItem('token');
-            let postData = {
-                token: token,
-                title: document.getElementById("postTitle").value,
-                category: document.getElementById("postCategory").value,
-                desc: document.getElementById("postDesc").value,
-                mediaUrl: document.getElementById("postMedia").value,
-                videoUrl: document.getElementById("postVideo").value,
-                link: document.getElementById("postLink").value
-            };
-
-            try {
-                let res = await fetch('/api/posts/add', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(postData)
-                });
-                let data = await res.json();
-                if(data.success) {
-                    closeModal('mainAdminPanel');
-                    loadPosts();
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            } catch(e) {
-                alert("حدث خطأ أثناء النشر");
-            }
-        }
-
-        function openLogin() {
-            if(sessionStorage.getItem('token')) {
-                document.getElementById("mainAdminPanel").style.display = "flex";
-            } else {
-                document.getElementById("loginBox").style.display = "flex";
-            }
-        }
+<!-- التفاصيل -->
+<div class="details" id="details">
+    <div class="details-box">
+        <button class="close" onclick="closeGame()">✖</button>
+        <div id="mediaContainer"></div>
+        <h1 id="title" style="color:gold; margin: 15px 0; font-size: 22px;"></h1>
+        <p id="description" style="margin-bottom: 15px;"></p>
         
-        function closeModal(id) { 
-            document.getElementById(id).style.display = "none"; 
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <div id="stars" style="color:gold;"></div>
+            <button onclick="likeCurrentItem()" id="likeBtn" style="background:#222; border:1px solid gold; color:white; padding:6px 12px; border-radius:8px; cursor:pointer;">❤️ إعجاب (<span id="likeCount">0</span>)</button>
+        </div>
+        
+        <div id="downloads" style="color:#00ff99; margin: 5px 0;"></div>
+        <div id="version" style="color:#aaa; margin-bottom:15px;"></div>
+        
+        <a id="downloadButton" class="download" target="_blank" style="display:none;">تحميل الملف / مشاهدة الأصل</a>
+
+        <!-- قسم التعليقات والتفاعل -->
+        <div class="comments-section">
+            <h3>💬 التعليقات</h3>
+            <div class="comment-input-box">
+                <input type="text" id="commentInput" placeholder="اكتب تعليقك...">
+                <button onclick="addComment()">إرسال</button>
+            </div>
+            <div class="comment-list" id="commentList"></div>
+        </div>
+    </div>
+</div>
+
+<!-- الإشعارات -->
+<div id="notify" class="notify"></div>
+
+<!-- ملف المستخدم -->
+<div id="profilePanel" class="panel">
+    <h2>👤 حساب المستخدم</h2>
+    <p>اسم المستخدم: <b>زائر مميز</b></p>
+    <p>حالة الحساب: <span style="color:#00ff99;">متصل آمن</span></p>
+    <button onclick="closePanels()">إغلاق</button>
+</div>
+
+<!-- تسجيل دخول الأدمن -->
+<div id="loginBox" class="login-box">
+    <div class="login-card">
+        <h2>تسجيل دخول المدير الآمن</h2>
+        <input type="password" id="adminPassword" placeholder="كلمة المرور">
+        <button onclick="loginAdmin()">دخول</button>
+        <button onclick="closeLogin()" style="background:red; color:white; margin-top:5px;">إغلاق</button>
+    </div>
+</div>
+
+<!-- لوحة الأدمن والتحكم الكامل والحذف -->
+<div id="adminPanel" class="admin-panel">
+    <h2 style="color:gold;">⚙️ لوحة التحكم والإدارة المركزية</h2>
+    
+    <div style="background:#181818; padding:15px; border-radius:10px; border:1px solid gold; margin-bottom:20px;">
+        <h3 style="color:gold; margin-bottom:10px;">➕ إضافة عنصر جديد</h3>
+        <input type="text" id="newName" placeholder="اسم العنصر (لعبة، تطبيق، فيديو)">
+        <textarea id="newDesc" placeholder="الوصف"></textarea>
+        <input type="text" id="newImage" placeholder="رابط الصورة (للألعاب/التطبيقات) أو رابط اليوتيوب (للفيديوهات)">
+        <input type="text" id="newLink" placeholder="رابط التحميل المباشر (اختياري)">
+        <select id="newType">
+            <option value="لعبة">لعبة</option>
+            <option value="تطبيق">تطبيق</option>
+            <option value="فيديو">فيديو يوتيوب</option>
+        </select>
+        <select id="newPrice">
+            <option value="مجاني">مجاني</option>
+            <option value="مدفوع">مدفوع</option>
+            <option value="حصري">فيديو حصري</option>
+        </select>
+        <button onclick="addItem()" style="background:gold; border:none; padding:10px; width:100%; font-weight:bold; border-radius:8px; cursor:pointer;">نشر العنصر</button>
+    </div>
+
+    <h3 style="color:gold; margin-bottom:10px;">🗑️ إدارة وحذف العناصر المنشورة</h3>
+    <div id="adminItemsList"></div>
+
+    <button onclick="closeAdmin()" style="background:red; color:white; margin-top:20px; padding:10px; border:none; width:100%; border-radius:8px; cursor:pointer;">إغلاق لوحة التحكم</button>
+</div>
+
+<!-- الشريط السفلي -->
+<div class="bottom-nav">
+    <button onclick="window.scrollTo({top:0, behavior:'smooth'})">🏠<span>الرئيسية</span></button>
+    <button onclick="filterGames('لعبة')">🎮<span>الألعاب</span></button>
+    <button onclick="filterGames('تطبيق')">📱<span>التطبيقات</span></button>
+    <button onclick="filterGames('فيديو')">▶️<span>الفيديوهات</span></button>
+</div>
+
+<footer>STAR LINK HOLDING © 2026 - نظام آمن ومشفر بالكامل</footer>
+
+<script>
+let games = [
+    {
+        name: "شرح تفعيل وتعليم المنصة",
+        type: "فيديو",
+        desc: "فيديو تعليمي احترافي لطريقة عمل منصة ومجموعة ستار لينك القابضة.",
+        downloads: 4300,
+        version: "1.0",
+        price: "حصري",
+        rating: "★★★★★",
+        image: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        link: "https://youtube.com",
+        likes: 120,
+        comments: ["رائع جداً شكراً لك", "موقع احترافي بمعنى الكلمة"]
+    },
+    {
+        name: "لعبة السباق الخارق",
+        type: "لعبة",
+        desc: "أفضل لعبة سباق سيارات ثلاثية الأبعاد.",
+        downloads: 15200,
+        version: "1.0",
+        price: "مجاني",
+        rating: "★★★★★",
+        image: "https://picsum.photos/400/250?1",
+        link: "#",
+        likes: 45,
+        comments: ["لعبة ممتازة وتعمل بسلاسة"]
+    }
+];
+
+let activeIndex = null;
+
+function getYouTubeEmbedUrl(url) {
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
+    return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}` : url;
+}
+
+function show(list) {
+    let html = "";
+    list.forEach((g) => {
+        let globalIndex = games.indexOf(g);
+        let mediaHtml = "";
+        
+        if (g.type === "فيديو") {
+            let embedUrl = getYouTubeEmbedUrl(g.image);
+            mediaHtml = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+        } else {
+            mediaHtml = `<img src="${g.image}" alt="${g.name}">`;
         }
 
-        window.onload = loadPosts;
-    </script>
+        html += `
+        <div class="card">
+            ${mediaHtml}
+            <h2>${g.name}</h2>
+            <p>${g.desc}</p>
+            <div class="card-actions">
+                <span class="badge ${g.type === 'فيديو' ? 'video-badge' : (g.price === 'مجاني' ? 'free' : 'paid')}">${g.price}</span>
+                <span style="font-size:12px; color:#aaa;">❤️ ${g.likes || 0}</span>
+            </div>
+            <button class="download" onclick="openGame(${globalIndex})">عرض التفاصيل والتفاعل</button>
+        </div>
+        `;
+    });
+    document.getElementById("games").innerHTML = html;
+    renderAdminItemsList();
+}
+
+function searchGames() {
+    let text = document.getElementById("search").value.toLowerCase();
+    let result = games.filter(g => g.name.toLowerCase().includes(text));
+    show(result);
+}
+
+function filterGames(type) {
+    if (type === "الكل") {
+        show(games);
+        return;
+    }
+    let result = games.filter(g => g.type === type);
+    show(result);
+}
+
+function openGame(i) {
+    activeIndex = i;
+    let g = games[i];
+    document.getElementById("details").style.display = "block";
+    
+    let mediaContainer = document.getElementById("mediaContainer");
+    if (g.type === "فيديو") {
+        mediaContainer.innerHTML = `<iframe src="${getYouTubeEmbedUrl(g.image)}" allowfullscreen style="width:100%; height:280px; border-radius:10px;"></iframe>`;
+    } else {
+        mediaContainer.innerHTML = `<img src="${g.image}" style="width:100%; height:280px; object-fit:cover; border-radius:10px;">`;
+    }
+
+    document.getElementById("title").innerHTML = g.name;
+    document.getElementById("description").innerHTML = g.desc;
+    document.getElementById("stars").innerHTML = "التقييم: " + g.rating;
+    document.getElementById("likeCount").innerHTML = g.likes || 0;
+    document.getElementById("downloads").innerHTML = "⬇️ " + (g.downloads || 0) + " تفاعل / تحميل";
+    document.getElementById("version").innerHTML = "الإصدار: " + (g.version || "1.0");
+
+    let dlBtn = document.getElementById("downloadButton");
+    if (g.link && g.link !== "#") {
+        dlBtn.style.display = "block";
+        dlBtn.href = g.link;
+    } else {
+        dlBtn.style.display = "none";
+    }
+
+    renderComments();
+}
+
+function closeGame() {
+    document.getElementById("details").style.display = "none";
+    activeIndex = null;
+}
+
+function likeCurrentItem() {
+    if (activeIndex !== null) {
+        games[activeIndex].likes = (games[activeIndex].likes || 0) + 1;
+        document.getElementById("likeCount").innerHTML = games[activeIndex].likes;
+        showNotify("❤️ شكراً لتفاعلك!");
+        show(games);
+    }
+}
+
+function renderComments() {
+    let commentList = document.getElementById("commentList");
+    let g = games[activeIndex];
+    if (!g.comments) g.comments = [];
+    
+    let html = "";
+    g.comments.forEach(c => {
+        html += `<div class="comment-item">${c}</div>`;
+    });
+    commentList.innerHTML = html || "<p style='color:#777; text-align:center;'>لا توجد تعليقات بعد، كن أول المعلقين!</p>";
+}
+
+function addComment() {
+    let input = document.getElementById("commentInput");
+    let text = input.value.trim();
+    if (text && activeIndex !== null) {
+        if (!games[activeIndex].comments) games[activeIndex].comments = [];
+        games[activeIndex].comments.push(text);
+        input.value = "";
+        renderComments();
+        showNotify("💬 تم إضافة تعليقك بنجاح");
+    }
+}
+
+function showNotify(text) {
+    let n = document.getElementById("notify");
+    n.innerHTML = text;
+    n.style.display = "block";
+    setTimeout(() => { n.style.display = "none"; }, 2000);
+}
+
+function openProfile() { document.getElementById("profilePanel").classList.add("show"); }
+function closePanels() { document.querySelectorAll(".panel").forEach(p => p.classList.remove("show")); }
+function toggleTheme() { document.body.classList.toggle("light-mode"); }
+
+function openLogin() { document.getElementById("loginBox").style.display = "flex"; }
+function closeLogin() { document.getElementById("loginBox").style.display = "none"; }
+
+async function hashPassword(string) {
+    const utf8 = new TextEncoder().encode(string);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function loginAdmin() {
+    let pass = document.getElementById("adminPassword").value;
+    
+    try {
+        // إرسال كلمة المرور إلى السيرفر للتحقق منها سراً وسد ثغرة F12
+        let response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pass })
+        });
+        
+        let result = await response.json();
+        
+        if (result.success) {
+            closeLogin();
+            document.getElementById("adminPanel").classList.add("show");
+            showNotify("✅ مرحباً بك في لوحة تحكم المدير الآمنة");
+            document.getElementById("adminPassword").value = "";
+        } else {
+            showNotify("❌ كلمة المرور غير صحيحة");
+        }
+    } catch (error) {
+        showNotify("❌ حدث خطأ في الاتصال بالسيرفر");
+    }
+}
+
+
+function closeAdmin() { document.getElementById("adminPanel").classList.remove("show"); }
+
+function addItem() {
+    let name = document.getElementById("newName").value;
+    if(!name) {
+        showNotify("⚠️ يرجى إدخال اسم العنصر على الأقل");
+        return;
+    }
+    
+    let newItem = {
+        name: name,
+        desc: document.getElementById("newDesc").value || "لا يوجد وصف",
+        image: document.getElementById("newImage").value || "https://picsum.photos/400/250",
+        link: document.getElementById("newLink").value || "#",
+        type: document.getElementById("newType").value,
+        price: document.getElementById("newPrice").value,
+        rating: "★★★★★",
+        downloads: 0,
+        version: "1.0",
+        likes: 0,
+        comments: []
+    };
+    
+    games.unshift(newItem);
+    show(games);
+    closeAdmin();
+    showNotify("✅ تم نشر العنصر بنجاح في المنصة");
+    
+    document.getElementById("newName").value = "";
+    document.getElementById("newDesc").value = "";
+    document.getElementById("newImage").value = "";
+    document.getElementById("newLink").value = "";
+}
+
+function deleteItem(index) {
+    if(confirm("هل أنت متأكد من حذف هذا العنصر نهائياً؟")) {
+        games.splice(index, 1);
+        show(games);
+        showNotify("🗑️ تم الحذف بنجاح");
+    }
+}
+
+function renderAdminItemsList() {
+    let listContainer = document.getElementById("adminItemsList");
+    let html = "";
+    games.forEach((g, index) => {
+        html += `
+        <div class="admin-item-row">
+            <span><b>${g.name}</b> (${g.type})</span>
+            <button class="delete-btn" onclick="deleteItem(${index})">حذف</button>
+        </div>
+        `;
+    });
+    listContainer.innerHTML = html || "<p style='color:#777;'>لا توجد عناصر حالياً.</p>";
+}
+
+// التشغيل المبدئي للمنصة
+show(games);
+</script>
 
 </body>
 </html>
