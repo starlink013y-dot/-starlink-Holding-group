@@ -352,7 +352,7 @@ footer{
 
 <section class="hero">
     <h1>مجموعة ستار لينك القابضة</h1>
-    <p>منصة احترافية لنشر الألعاب، التطبيقات، وفيديوهات اليوتيوب</p>
+    <p>منصة احترافية لنشر ألعاب قودوت (Godot)، التطبيقات، وفيديوهات اليوتيوب</p>
     <input id="search" type="text" placeholder="ابحث عن لعبة، تطبيق، أو فيديو..." onkeyup="searchGames()">
 
     <div class="categories">
@@ -363,7 +363,7 @@ footer{
     </div>
 </section>
 
-<h2 class="section-title">🔥 المحتوى المتميز</h2>
+<h2 class="section-title">🔥 المحتوى المتميز ومشاريع قودوت</h2>
 <div class="games" id="games"></div>
 
 <!-- التفاصيل -->
@@ -382,9 +382,9 @@ footer{
         <div id="downloads" style="color:#00ff99; margin: 5px 0;"></div>
         <div id="version" style="color:#aaa; margin-bottom:15px;"></div>
         
-        <a id="downloadButton" class="download" target="_blank" style="display:none;">تحميل الملف / مشاهدة الأصل</a>
+        <a id="downloadButton" class="download" target="_blank" style="display:none;">تحميل ملف APK / مشاهدة الأصل</a>
 
-        <!-- قسم التعليقات والتفاعل -->
+        <!-- قسم التعليقات -->
         <div class="comments-section">
             <h3>💬 التعليقات</h3>
             <div class="comment-input-box">
@@ -402,7 +402,7 @@ footer{
 <!-- ملف المستخدم -->
 <div id="profilePanel" class="panel">
     <h2>👤 حساب المستخدم</h2>
-    <p>اسم المستخدم: <b>زائر مميز</b></p>
+    <p>اسم المستخدم: <b>مطور ستار لينك</b></p>
     <p>حالة الحساب: <span style="color:#00ff99;">متصل آمن</span></p>
     <button onclick="closePanels()">إغلاق</button>
 </div>
@@ -417,27 +417,31 @@ footer{
     </div>
 </div>
 
-<!-- لوحة الأدمن والتحكم الكامل والحذف -->
+<!-- لوحة الأدمن (تدعم رفع ملفات APK ومشاريع قودوت) -->
 <div id="adminPanel" class="admin-panel">
-    <h2 style="color:gold;">⚙️ لوحة التحكم والإدارة المركزية</h2>
+    <h2 style="color:gold;">⚙️ لوحة التحكم وإدارة مشاريع قودوت</h2>
     
     <div style="background:#181818; padding:15px; border-radius:10px; border:1px solid gold; margin-bottom:20px;">
-        <h3 style="color:gold; margin-bottom:10px;">➕ إضافة عنصر جديد</h3>
-        <input type="text" id="newName" placeholder="اسم العنصر (لعبة، تطبيق، فيديو)">
-        <textarea id="newDesc" placeholder="الوصف"></textarea>
-        <input type="text" id="newImage" placeholder="رابط الصورة أو رابط اليوتيوب">
-        <input type="text" id="newLink" placeholder="رابط التحميل المباشر (اختياري)">
+        <h3 style="color:gold; margin-bottom:10px;">➕ نشر مشروع قودوت أو عنصر جديد</h3>
+        <input type="text" id="newName" placeholder="اسم اللعبة أو المشروع">
+        <textarea id="newDesc" placeholder="الوصف ومميزات اللعبة المصممة بـ Godot"></textarea>
+        <input type="text" id="newImage" placeholder="رابط صورة اللعبة أو بوستر الغلاف">
+        
+        <label style="color:gold; font-size:14px; display:block; margin-top:5px;">اختر ملف APK (للألعاب المصدرة من قودوت):</label>
+        <input type="file" id="apkFile" accept=".apk" style="padding:8px; border:1px dashed gold;">
+        
+        <input type="text" id="newLink" placeholder="أو رابط تحميل مباشر بديل (اختياري)">
         <select id="newType">
-            <option value="لعبة">لعبة</option>
+            <option value="لعبة">لعبة قودوت (Godot)</option>
             <option value="تطبيق">تطبيق</option>
             <option value="فيديو">فيديو يوتيوب</option>
         </select>
         <select id="newPrice">
             <option value="مجاني">مجاني</option>
             <option value="مدفوع">مدفوع</option>
-            <option value="حصري">فيديو حصري</option>
+            <option value="حصري">مشروع حصري</option>
         </select>
-        <button onclick="addItem()" style="background:gold; border:none; padding:10px; width:100%; font-weight:bold; border-radius:8px; cursor:pointer;">نشر العنصر</button>
+        <button onclick="addItem()" style="background:gold; border:none; padding:10px; width:100%; font-weight:bold; border-radius:8px; cursor:pointer; margin-top:10px;">رفع ونشر العنصر</button>
     </div>
 
     <h3 style="color:gold; margin-bottom:10px;">🗑️ إدارة وحذف العناصر المنشورة</h3>
@@ -457,36 +461,18 @@ footer{
 <footer>STAR LINK HOLDING © 2026 - نظام آمن ومشفر بالكامل</footer>
 
 <script>
-let games = [
-    {
-        name: "شرح تفعيل وتعليم المنصة",
-        type: "فيديو",
-        desc: "فيديو تعليمي احترافي لطريقة عمل منصة ومجموعة ستار لينك القابضة.",
-        downloads: 4300,
-        version: "1.0",
-        price: "حصري",
-        rating: "★★★★★",
-        image: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        link: "https://youtube.com",
-        likes: 120,
-        comments: ["رائع جداً شكراً لك", "موقع احترافي بمعنى الكلمة"]
-    },
-    {
-        name: "لعبة السباق الخارق",
-        type: "لعبة",
-        desc: "أفضل لعبة سباق سيارات ثلاثية الأبعاد.",
-        downloads: 15200,
-        version: "1.0",
-        price: "مجاني",
-        rating: "★★★★★",
-        image: "https://picsum.photos/400/250?1",
-        link: "#",
-        likes: 45,
-        comments: ["لعبة ممتازة وتعمل بسلاسة"]
-    }
-];
+let games = [];
 
-let activeIndex = null;
+// جلب العناصر المحفوظة من السيرفر عند بدء التشغيل
+async function fetchGames() {
+    try {
+        let res = await fetch('/api/games');
+        games = await res.json();
+        show(games);
+    } catch (e) {
+        console.error("خطأ في الاتصال بالسيرفر");
+    }
+}
 
 function getYouTubeEmbedUrl(url) {
     let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -504,7 +490,7 @@ function show(list) {
             let embedUrl = getYouTubeEmbedUrl(g.image);
             mediaHtml = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
         } else {
-            mediaHtml = `<img src="${g.image}" alt="${g.name}">`;
+            mediaHtml = `<img src="${g.image || 'https://picsum.photos/400/250'}" alt="${g.name}">`;
         }
 
         html += `
@@ -516,7 +502,7 @@ function show(list) {
                 <span class="badge ${g.type === 'فيديو' ? 'video-badge' : (g.price === 'مجاني' ? 'free' : 'paid')}">${g.price}</span>
                 <span style="font-size:12px; color:#aaa;">❤️ ${g.likes || 0}</span>
             </div>
-            <button class="download" onclick="openGame(${globalIndex})">عرض التفاصيل والتفاعل</button>
+            <button class="download" onclick="openGame(${globalIndex})">عرض التفاصيل والتحميل</button>
         </div>
         `;
     });
@@ -539,6 +525,7 @@ function filterGames(type) {
     show(result);
 }
 
+let activeIndex = null;
 function openGame(i) {
     activeIndex = i;
     let g = games[i];
@@ -548,14 +535,14 @@ function openGame(i) {
     if (g.type === "فيديو") {
         mediaContainer.innerHTML = `<iframe src="${getYouTubeEmbedUrl(g.image)}" allowfullscreen style="width:100%; height:280px; border-radius:10px;"></iframe>`;
     } else {
-        mediaContainer.innerHTML = `<img src="${g.image}" style="width:100%; height:280px; object-fit:cover; border-radius:10px;">`;
+        mediaContainer.innerHTML = `<img src="${g.image || 'https://picsum.photos/400/250'}" style="width:100%; height:280px; object-fit:cover; border-radius:10px;">`;
     }
 
     document.getElementById("title").innerHTML = g.name;
     document.getElementById("description").innerHTML = g.desc;
     document.getElementById("stars").innerHTML = "التقييم: " + g.rating;
     document.getElementById("likeCount").innerHTML = g.likes || 0;
-    document.getElementById("downloads").innerHTML = "⬇️ " + (g.downloads || 0) + " تفاعل / تحميل";
+    document.getElementById("downloads").innerHTML = "⬇️ " + (g.downloads || 0) + " عملية تحميل";
     document.getElementById("version").innerHTML = "الإصدار: " + (g.version || "1.0");
 
     let dlBtn = document.getElementById("downloadButton");
@@ -574,11 +561,13 @@ function closeGame() {
     activeIndex = null;
 }
 
-function likeCurrentItem() {
+async function likeCurrentItem() {
     if (activeIndex !== null) {
         games[activeIndex].likes = (games[activeIndex].likes || 0) + 1;
         document.getElementById("likeCount").innerHTML = games[activeIndex].likes;
         showNotify("❤️ شكراً لتفاعلك!");
+        // مزامنة التحديث مع السيرفر
+        await fetch(`/api/games/${activeIndex}/like`, { method: 'POST' });
         show(games);
     }
 }
@@ -595,7 +584,7 @@ function renderComments() {
     commentList.innerHTML = html || "<p style='color:#777; text-align:center;'>لا توجد تعليقات بعد، كن أول المعلقين!</p>";
 }
 
-function addComment() {
+async function addComment() {
     let input = document.getElementById("commentInput");
     let text = input.value.trim();
     if (text && activeIndex !== null) {
@@ -604,6 +593,12 @@ function addComment() {
         input.value = "";
         renderComments();
         showNotify("💬 تم إضافة تعليقك بنجاح");
+        
+        await fetch(`/api/games/${activeIndex}/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ comment: text })
+        });
     }
 }
 
@@ -621,19 +616,15 @@ function toggleTheme() { document.body.classList.toggle("light-mode"); }
 function openLogin() { document.getElementById("loginBox").style.display = "flex"; }
 function closeLogin() { document.getElementById("loginBox").style.display = "none"; }
 
-// دالة تسجيل الدخول الآمنة عبر السيرفر (محمية من F12)
 async function loginAdmin() {
     let pass = document.getElementById("adminPassword").value;
-    
     try {
         let response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: pass })
         });
-        
         let result = await response.json();
-        
         if (result.success) {
             closeLogin();
             document.getElementById("adminPanel").classList.add("show");
@@ -643,49 +634,70 @@ async function loginAdmin() {
             showNotify("❌ كلمة المرور غير صحيحة");
         }
     } catch (error) {
-        showNotify("❌ حدث خطأ في الاتصال بالسيرفر");
+        showNotify("❌ خطأ في الاتصال بالسيرفر");
     }
 }
 
 function closeAdmin() { document.getElementById("adminPanel").classList.remove("show"); }
 
-function addItem() {
+// دالة نشر العناصر مع دعم رفع ملفات APK ومشاريع قودوت
+async function addItem() {
     let name = document.getElementById("newName").value;
     if(!name) {
-        showNotify("⚠️ يرجى إدخال اسم العنصر على الأقل");
+        showNotify("⚠️ يرجى إدخال اسم اللعبة أو المشروع");
         return;
     }
     
-    let newItem = {
-        name: name,
-        desc: document.getElementById("newDesc").value || "لا يوجد وصف",
-        image: document.getElementById("newImage").value || "https://picsum.photos/400/250",
-        link: document.getElementById("newLink").value || "#",
-        type: document.getElementById("newType").value,
-        price: document.getElementById("newPrice").value,
-        rating: "★★★★★",
-        downloads: 0,
-        version: "1.0",
-        likes: 0,
-        comments: []
-    };
+    let apkInput = document.getElementById("apkFile");
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("desc", document.getElementById("newDesc").value || "لا يوجد وصف للمشروع");
+    formData.append("image", document.getElementById("newImage").value || "https://picsum.photos/400/250");
+    formData.append("link", document.getElementById("newLink").value || "");
+    formData.append("type", document.getElementById("newType").value);
+    formData.append("price", document.getElementById("newPrice").value);
+
+    if (apkInput.files.length > 0) {
+        formData.append("apk", apkInput.files[0]);
+    }
     
-    games.unshift(newItem);
-    show(games);
-    closeAdmin();
-    showNotify("✅ تم نشر العنصر بنجاح في المنصة");
-    
-    document.getElementById("newName").value = "";
-    document.getElementById("newDesc").value = "";
-    document.getElementById("newImage").value = "";
-    document.getElementById("newLink").value = "";
+    try {
+        showNotify("⏳ جارٍ رفع المشروع وملف APK...");
+        let res = await fetch('/api/games', {
+            method: 'POST',
+            body: formData
+        });
+        let data = await res.json();
+        if (data.success) {
+            games = data.games;
+            show(games);
+            closeAdmin();
+            showNotify("✅ تم نشر اللعبة وحفظها بنجاح");
+            
+            document.getElementById("newName").value = "";
+            document.getElementById("newDesc").value = "";
+            document.getElementById("newImage").value = "";
+            document.getElementById("newLink").value = "";
+            document.getElementById("apkFile").value = "";
+        }
+    } catch (e) {
+        showNotify("❌ حدث خطأ أثناء الرفع والحفظ");
+    }
 }
 
-function deleteItem(index) {
+async function deleteItem(index) {
     if(confirm("هل أنت متأكد من حذف هذا العنصر نهائياً؟")) {
-        games.splice(index, 1);
-        show(games);
-        showNotify("🗑️ تم الحذف بنجاح");
+        try {
+            let res = await fetch(`/api/games/${index}`, { method: 'DELETE' });
+            let data = await res.json();
+            if (data.success) {
+                games = data.games;
+                show(games);
+                showNotify("🗑️ تم الحذف بنجاح");
+            }
+        } catch (e) {
+            showNotify("❌ خطأ أثناء الحذف");
+        }
     }
 }
 
@@ -703,8 +715,8 @@ function renderAdminItemsList() {
     listContainer.innerHTML = html || "<p style='color:#777;'>لا توجد عناصر حالياً.</p>";
 }
 
-// التشغيل المبدئي للمنصة
-show(games);
+// جلب البيانات عند التحميل
+fetchGames();
 </script>
 
 </body>
